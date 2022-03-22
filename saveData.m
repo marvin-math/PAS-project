@@ -1,13 +1,43 @@
-function [trialData] = saveData(trial, task, time, env, trialData, sessionID, timingData)
+function [trialData] = saveData(trial,thisTrial, task, time, env, trialData, sessionID, timingData)
 
-trialDataTmp = table([1:length(trial)]', ... % all trials
-    repmat(sessionID,length(trial), 1), ... % condition, repeat nTrials times
-    repelem(time.MOA, length(trial))', ... % Mask onset asynchrony
-    [trial.nStimulus]', ...
-    [trial.ObjRespPos]', ...
-    repelem(NaN, length(trial))', ...
-    [trial.respPos]');
-trialDataTmp.Properties.VariableNames = trialData.Properties.VariableNames;
+switch sessionID
+    case 'narrowMOA'
+        trialDataTmp = table([1:length(trial)]', ... % all trials
+            repmat(sessionID,length(trial), 1), ... % condition, repeat nTrials times
+            [trial.MOATime]', ... % Mask onset asynchrony
+            [trial.nStimulus]', ...
+            [trial.ObjRespPos]', ...
+            repelem(NaN, length(trial))', ...
+            [trial.respPos]');
+        trialDataTmp.Properties.VariableNames = trialData.Properties.VariableNames;
+    case 'narrowlow'
+        trialDataTmp = table([1:length(trial)]', ... % all trials
+            repmat(sessionID,length(trial), 1), ... % condition, repeat nTrials times
+            repmat(time.MOA, length(trial),1), ... % Mask onset asynchrony
+            [trial.nStimulus]', ...
+            [trial.ObjRespPos]', ...
+            repelem(NaN, length(trial))', ...
+            [trial.respPos]');
+        trialDataTmp.Properties.VariableNames = trialData.Properties.VariableNames;
+    case 'narrowhigh'
+        trialDataTmp = table([1:length(trial)]', ... % all trials
+            repmat(sessionID,length(trial), 1), ... % condition, repeat nTrials times
+            repmat(time.MOA, length(trial),1), ... % Mask onset asynchrony
+            [trial.nStimulus]', ...
+            [trial.ObjRespPos]', ...
+            repelem(NaN, length(trial))', ...
+            [trial.respPos]');
+        trialDataTmp.Properties.VariableNames = trialData.Properties.VariableNames;
+    case 'wide'
+        trialDataTmp = table([1:length(trial)]', ... % all trials
+            repmat(sessionID,length(trial), 1), ... % condition, repeat nTrials times
+            repmat(time.MOA, length(trial),1), ... % Mask onset asynchrony
+            [trial.nStimulus]', ...
+            [trial.ObjRespPos]', ...
+            repelem(NaN, length(trial))', ...
+            [trial.respPos]');
+        trialDataTmp.Properties.VariableNames = trialData.Properties.VariableNames;
+end
 
 % Add to previous data
 trialData = [trialData; trialDataTmp];

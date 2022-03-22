@@ -1,4 +1,4 @@
-function [time, timingData] = timeParameters(window, task, trial, thisTrial)
+function [time, timingData] = timeParameters(window, task, trial, sessionID)
 % Sets the timing parameters of the partial report task. 
 
 %% flip rate
@@ -17,9 +17,20 @@ time.halfifi = time.ifi/2;
 %% Stimulus
 %time.stimExpTime = trial(thisTrial).stimExpTime;  % Stimulus array exposure time [s]
 
-%% Mask
-time.MOA = 0; % mask onset delay [s] -- this is used when cue timing is not manipulated
-time.maskExpTime = 0.3; % Duration of cue [s]
+%Mask and StimDur
+switch sessionID
+    case 'narrowMOA'
+        time.StimExp = 0.016;
+    case 'narrowlow'
+        time.MOA = 0;
+    case 'narrowhigh'
+        time.MOA = 0;
+    case 'wide'
+        time.MOA = 0;
+end
+        
+ % mask onset delay [s] -- this is used when cue timing is not manipulated
+time.maskExpTime = 0.3;% Duration of cue [s]
 %time.maskDelays = task.maskDelays; % In more cases - when cue timing is manipulated
 
 %% Experiment

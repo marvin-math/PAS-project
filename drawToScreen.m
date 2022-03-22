@@ -12,8 +12,24 @@ whichObject = strings(4, 1);
 counter = 1;
 expectedTime = 0;
 %
-MOA = time.MOA;
-stimExp = trial(thisTrial).stimExpTime;
+switch sessionID
+    case 'narrowMOA'
+        MOA = trial(thisTrial).MOATime;
+        stimExp = time.StimExp;
+    case 'narrowlow'
+        MOA = time.MOA;
+        stimExp = trial(thisTrial).stimExpTime;
+    case 'wide'
+        MOA = time.MOA;
+        stimExp = trial(thisTrial).stimExpTime;
+    case 'narrowhigh'
+        MOA = time.MOA;
+        stimExp = trial(thisTrial).stimExpTime;
+end
+        
+%MOA = trial(thisTrial).MOATime; %time.MOA;
+
+%stimExp = time.StimExp; %trial(thisTrial).stimExpTime;
 maskExp = time.maskExpTime;
 ITI = time.itiGap;
 
@@ -97,8 +113,20 @@ WaitSecs(time.respGap);
 
 %SAVE DATA
 %% Save the data
+
+switch sessionID
+    case 'narrowMOA'
+        manipulation = trial(thisTrial).MOATime;
+    case 'narrowlow'
+        manipulation = trial(thisTrial).stimExpTime;
+    case'wide'
+        manipulation = trial(thisTrial).stimExpTime;
+    case 'narrowhigh'
+        manipulation = trial(thisTrial).stimExpTime;
+end
+        
 whichTrial = repelem(thisTrial, length(timeRealFlip));
-manDuration = repelem(trial(thisTrial).stimExpTime, length(timeRealFlip));
+manDuration = repelem(manipulation, length(timeRealFlip));%trial(thisTrial).stimExpTime
 timingDataTrial = table(timeRealFlip, timeExpectedFlip, whichObject, manDuration', whichTrial');
 timingDataTrial.Properties.VariableNames = timingData.Properties.VariableNames;
 timingData = [timingData; timingDataTrial];

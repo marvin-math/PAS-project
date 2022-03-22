@@ -6,13 +6,17 @@ for thisTrial = 1:task.nTrials
     trial(thisTrial).nStimulus = randsample(1:4,1);
     trial(thisTrial).respPos = randi(task.PASnResp);
     trial(thisTrial).ObjRespPos = randi(task.ObjnResp);
-    counter = counter + 1
+    counter = counter + 1;
     switch sessionID
         case 'wide'
             trial(thisTrial).stimExpTime = task.stimExpTimesWide(counter-1);
             
-        case 'narrow'
-            trial(thisTrial).stimExpTime = task.stimExpTimesNarrow(counter-1);
+        case 'narrowlow'
+            trial(thisTrial).stimExpTime = task.stimExpTimesNarrowlow(counter-1);
+        case 'narrowhigh'
+            trial(thisTrial).stimExpTime = task.stimExpTimesNarrowhigh(counter-1);
+        case 'narrowMOA'
+            trial(thisTrial).MOATime = task.MOAnarrow(counter-1);
 end
 
   %  response = ['one'];

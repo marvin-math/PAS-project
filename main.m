@@ -8,7 +8,7 @@ Screen('Preference', 'SkipSyncTests', 1)
 
 %% Insert values
 
-nTrials = 5; %600;
+nTrials = 5;
 %dataSavingLocation = fullfile('/home/karla/Research/projects/iconic-memory/IM_partialReport', 'data', [whichExperiment, '_', version]); 
 
 
@@ -30,6 +30,7 @@ black = BlackIndex(screenNumber);
 
 subjID = input('Enter subject ID: \n','s'); %e.g. 001 002 010 099
 sessionID = input('Enter session type: \n', 's'); %e.g. 'pilot', 'testing'
+dataSaveMode = input('save data?: \n', 's');
 
 
 %% call the functions
@@ -40,9 +41,9 @@ addpath(genpath('functions'));
 [window, windowRect] = PsychImaging('OpenWindow', screenNumber, black);
 
 [env, trialData] = environmentSetup(window, windowRect, subjID, sessionID);
-task = taskParameters(nTrials, env);
+task = taskParameters(nTrials, env, sessionID);
 trial = generateTrials(window,task, sessionID);
-[time, timingData] = timeParameters(window,task, trial);
+[time, timingData] = timeParameters(window,task, trial, sessionID);
 
 %drawPAS(window, env)
 
@@ -50,10 +51,10 @@ trial = generateTrials(window,task, sessionID);
 for thisTrial = 1:task.nTrials
    
     [timingData, timingDataTrial] = drawToScreen(window, task, trial, thisTrial, env, time, sessionID, timingData);
-    WaitSecs(1)
-    [trial, exit] = responseobj(window, trial, thisTrial, task, env);
     %WaitSecs(1)
-    %[trial, exit] = responsePAS(window, trial, thisTrial, task, env);    
+    %[trial, exit] = responseobj(window, trial, thisTrial, task, env);
+    %WaitSecs(1)
+    [trial, exit] = responsePAS(window, trial, thisTrial, task, env);    
     
     if exit
         break;
@@ -73,9 +74,13 @@ for thisTrial = 1:task.nTrials
     
 end
 
-[trialData] = saveData(trial, task, time,env, trialData, sessionID, timingData);
-
-sca;
+switch dataSaveMode
+    case 'yes'
+        [trialData] = saveData(trial, thisTrial, task, time,env, trialData, sessionID, timingData);
+        sca;
+    case 'no'
+        sca;
+end
 
 
 

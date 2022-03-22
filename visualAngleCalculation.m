@@ -41,16 +41,6 @@ end
 % Average pixels per degree of visual field
 env.pixPerDegAvg = round((pixPerDegX + pixPerDegY)/2, 0);
 
-%% Eccentricity from center (i.e., stim array radius)
-%tan(vis. angle in radians) = stimulus radius in cm / screen distance in cm
-visAngleRad = deg2rad(task.stimRadius);
-%task.stimRadiusCm = tan(visAngleRad) * env.distFromScreen;
-task.stimRadiusPixels = task.stimRadius * env.pixPerDegAvg;
-
-%% Cue radius
-visAngleRad = deg2rad(task.cueRadius);
-task.cueRadiusCm = tan(visAngleRad) * env.distFromScreen;
-task.cueRadiusPixels = task.cueRadius * env.pixPerDegAvg;
 
 %% Fixation radius
 visAngleRad = deg2rad(task.fixRadius);
@@ -64,7 +54,7 @@ task.fixRadiusPixels = round(task.fixRadius * env.pixPerDegAvg);
 % sub-milimeter (hence "simplified" formula).
 % tan ( vis. angle in rad.) = stim width in cm / screen distance in cm
 
-% Width
+% Width of the stim rectangle
 visAngleRad = deg2rad(task.stimWidth);
 task.stimWidthCm = tan(visAngleRad) * env.distFromScreen;
 task.stimWidthPixels = task.stimWidth * env.pixPerDegAvg;
@@ -74,38 +64,5 @@ visAngleRad = deg2rad(task.stimHeight);
 task.stimWidthCm = tan(visAngleRad) * env.distFromScreen;
 task.stimHeightPixels = task.stimHeight * env.pixPerDegAvg;
 
-%% 4afc response probes size (simplified)
-% Width and height of each of the 4 probes (images) presented in the
-% response array for 4AF choice response.
-
-% Width
-visAngleRad = deg2rad(task.responseProbeWidth);
-task.responseProbeWidthCm = tan(visAngleRad) * env.distFromScreen;
-task.responseProbeWidthPixels = task.responseProbeWidth * env.pixPerDegAvg;
-
-% Height
-visAngleRad = deg2rad(task.responseProbeHeight);
-task.responseProbeHeightCm = tan(visAngleRad) * env.distFromScreen;
-task.responseProbeHeightPixels = task.responseProbeHeight * env.pixPerDegAvg;
-
-%% Determine number of pixels per centimeter for the given monitor
-% At the moment not used 
-%
-% if length(env.screenSize) == 1 % If only a diagonal is provided
-%     env.pixelsAcrossScreen = sqrt(env.screenRes(1)^2+env.screenRes(2)^2); % pixels in the diagonal
-%     env.pixelsPerCm = (env.pixelsAcrossScreen/stim.screenSize); % pixels in the diagonal / diagonal in cm
-%     
-% elseif length(env.screenSize) == 2 % If width and length are provided
-%     env.pixelsPerCm_x = env.screenRes(1) / env.screenSize(1);
-%     env.pixelsPerCm_y = env.screenRes(2) / env.screenSize(2);
-%     
-%     if round(env.pixelsPerCm_x, 0) == round(env.pixelsPerCm_y, 0)
-%         env.pixelsPerCm = round(env.pixelsPerCm_x);
-%     else % If the calculation doesn't end up the same for width and height (should be same number of pixels per cm in both)
-%         [env.pixelsPerCm_x env.pixelsPerCm_y]
-%         error('Please make sure the entered ScreenSize values (in cm) are correct.')
-%     end
-%     
-% end
 
 end
