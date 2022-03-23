@@ -8,7 +8,7 @@ Screen('Preference', 'SkipSyncTests', 1)
 
 %% Insert values
 
-nTrials = 5;
+nTrials = 300;
 %dataSavingLocation = fullfile('/home/karla/Research/projects/iconic-memory/IM_partialReport', 'data', [whichExperiment, '_', version]); 
 
 
@@ -52,7 +52,7 @@ for thisTrial = 1:task.nTrials
    
     [timingData, timingDataTrial] = drawToScreen(window, task, trial, thisTrial, env, time, sessionID, timingData);
     %WaitSecs(1)
-    %[trial, exit] = responseobj(window, trial, thisTrial, task, env);
+    [trial, exit] = responseobj(window, trial, thisTrial, task, env);
     %WaitSecs(1)
     [trial, exit] = responsePAS(window, trial, thisTrial, task, env);    
     
