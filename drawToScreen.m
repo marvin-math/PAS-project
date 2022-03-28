@@ -41,7 +41,7 @@ timeRealFlip(counter) = startTime - startTime;
 timeExpectedFlip(counter) = expectedTime;
 whichObject(counter) = 'initialFixation';
 counter = counter + 1;
-expectedTime = expectedTime + ITI; % Show next object after initGap
+expectedTime = expectedTime + ITI; % Show next object after itiGap
 
 %Draw stimuli
 if trial(thisTrial).nStimulus == 4

@@ -23,11 +23,11 @@ Screen('FrameRect', window, task.PASlineColour, resp_line4, penWidthPixels_squar
 
 %text
 Screen('TextSize', window, 15);
-DrawFormattedText(window, 'Absolutely clear image', env.xCenter+220,...
+DrawFormattedText(window, 'Clear experience', env.xCenter+230,...
     env.screenYpixels*0.45, [1 1 1]);
 
 Screen('TextSize', window, 15);
-DrawFormattedText(window, 'Almost clear image', env.xCenter+20,...
+DrawFormattedText(window, 'Almost clear experience', env.xCenter-5,...
     env.screenYpixels*0.45, [1 1 1]);
 
 Screen('TextSize', window, 15);

@@ -188,17 +188,17 @@ task.ObjResponses = [task.ObjRespTriangle; task.ObjRespDiamond; task.ObjRespSqua
 switch sessionID
     case 'narrowlow'
         task.stimdur_narrowlow = [0.016, 0.048, 0.08];%[0.016, 0.032, 0.048, 0.064, 0.08, 0.096, 0.112, 0.128, 0.144, 0.16, 0.176, 0.192, 0.208, 0.224, 0.24, 0.256, 0.272, 0.288, 0.304, 0.32];
-        task.stimdur_narrowlow_complete = repelem(task.stimdur_narrowlow, 100); %no hard coding! this should be repeated depending on how many trials there will be
+        task.stimdur_narrowlow_complete = repelem(task.stimdur_narrowlow, 200); %no hard coding! this should be repeated depending on how many trials there will be
         task.stimdur_narrowlow_shuffled = Shuffle(task.stimdur_narrowlow_complete);
         task.stimExpTimesNarrowlow = task.stimdur_narrowlow_shuffled;
     case 'wide'
         task.stimdur_wide = [0.016, 0.08, 0.144];
-        task.stimdur_wide_complete = repelem(task.stimdur_wide, 100); %no hard coding! this should be repeated depending on how many trials there will be
+        task.stimdur_wide_complete = repelem(task.stimdur_wide, 200); %no hard coding! this should be repeated depending on how many trials there will be
         task.stimdur_wide_shuffled = Shuffle(task.stimdur_wide_complete);
         task.stimExpTimesWide = task.stimdur_wide_shuffled;
     case 'narrowhigh'
         task.stimdur_narrowhigh = [0.08, 0.112, 0.144];%[0.016, 0.032, 0.048, 0.064, 0.08, 0.096, 0.112, 0.128, 0.144, 0.16, 0.176, 0.192, 0.208, 0.224, 0.24, 0.256, 0.272, 0.288, 0.304, 0.32];
-        task.stimdur_narrowhigh_complete = repelem(task.stimdur_narrowhigh, 100); %no hard coding! this should be repeated depending on how many trials there will be
+        task.stimdur_narrowhigh_complete = repelem(task.stimdur_narrowhigh, 200); %no hard coding! this should be repeated depending on how many trials there will be
         task.stimdur_narrowhigh_shuffled = Shuffle(task.stimdur_narrowhigh_complete);
         task.stimExpTimesNarrowhigh = task.stimdur_narrowhigh_shuffled;
     case 'narrowMOA'
@@ -207,6 +207,8 @@ switch sessionID
         task.MOA_narrow_shuffled = Shuffle(task.MOA_narrow_complete);
         task.MOAnarrow = task.MOA_narrow_shuffled;
 end
+
+task.breaknr = [2,150, 300, 450, 600];
 
 % Fonts and environment setup
 task.fontsizeInstruction = 1; % Font size for instructions [deg of visual field]
