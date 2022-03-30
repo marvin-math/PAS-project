@@ -9,6 +9,7 @@ function [env, trialData] = environmentSetup(window, windowRect, subjID, session
 env.fileID = ['SUB_', subjID];
 env.fileName = [env.fileID, sessionID];
 env.fileDir = fullfile('C:\Users\marvi\Documents\MATLAB\Masterarbeit\data', env.fileID);
+env.ImageFolderLocation = fullfile('C:\Users\marvi\Documents\MATLAB\Masterarbeit\images\Rastergrafik.png');
 if ~exist(env.fileDir,'dir')
     mkdir(env.fileDir);
 end
@@ -26,8 +27,8 @@ end
 
 % Create a table for storing data
 varNames = {'trial', 'condition', 'MOA', 'corrStim', 'respStim', 'RT', ...
-    'PASresp'};
-varTypes = {'double', 'string', 'double', 'double', 'double', 'double', 'double'};
+    'PASresp', 'PracticeTrials', 'RTobj', 'RTpas'};
+varTypes = {'double', 'string', 'double', 'double', 'double', 'double', 'double', 'double', 'double', 'double'};
 size = [0, length(varNames)];
 trialData = table('Size', size, 'VariableTypes', varTypes, 'VariableNames', varNames);
  

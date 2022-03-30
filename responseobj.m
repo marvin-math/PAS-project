@@ -7,6 +7,7 @@ drawResponse(window, 'objective', trial, thisTrial, env, task);
 
 %Selection Loop: until a letter is selected (Return is pressed)
 %tStart = GetSecs;
+tStart = GetSecs;
 while(~strcmp(keyName,'Return')) 
     % Wait until Keyboard Input (Left, Right, Return, Escape)
     [~, keyCode, ~] = KbWait([],2);
@@ -30,3 +31,5 @@ while(~strcmp(keyName,'Return'))
         return;
     end     
 end
+tEnd = GetSecs;
+trial(thisTrial).RTobj = tEnd - tStart;

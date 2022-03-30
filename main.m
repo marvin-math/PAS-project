@@ -9,6 +9,7 @@ Screen('Preference', 'SkipSyncTests', 1)
 %% Insert values
 
 nTrials = 10;
+nTestTrials = 5;
 %dataSavingLocation = fullfile('/home/karla/Research/projects/iconic-memory/IM_partialReport', 'data', [whichExperiment, '_', version]); 
 
 
@@ -41,22 +42,33 @@ addpath(genpath('functions'));
 [window, windowRect] = PsychImaging('OpenWindow', screenNumber, black);
 
 [env, trialData] = environmentSetup(window, windowRect, subjID, sessionID);
-task = taskParameters(nTrials, env, sessionID);
+task = taskParameters(nTrials, env, sessionID, nTestTrials);
 trial = generateTrials(window,task, sessionID);
 [time, timingData] = timeParameters(window,task, trial, sessionID);
 
 %drawPAS(window, env)
+instructions(env, window, task)
 
+% for testTrial = 1:nTestTrials
+%     drawToScreen(window, task, trial, thisTrial, env, time, sessionID, timingData);
+%     responseobj(window, trial, thisTrial, task, env);
+%     responsePAS(window, trial, thisTrial, task, env);
+% end
 
-for thisTrial = 1:task.nTrials
+for thisTrial = 1:length(trial) 
     if ismember(thisTrial, task.breaknr)
-        
-        countdown(env, window)   
+        countdown1(env, window, time, thisTrial, task)   
+    end
+    
+    if thisTrial == nTestTrials+1
+        screen6 = ['The practice section is now over. \n\n\n' ...
+            'feel free to ask questions about the task if you have any!\n\n\n' ...
+            'If not, press any key to start the experiment.'];
+        DrawFormattedText(window, screen6, 'center', 'center');
+        Screen('Flip', window);
+        [~, ~, ~] = KbStrokeWait;
     end
 
-%         KbStrokeWait;
-%     end
-    
     [timingData, timingDataTrial] = drawToScreen(window, task, trial, thisTrial, env, time, sessionID, timingData);
     %WaitSecs(1)
     [trial, exit] = responseobj(window, trial, thisTrial, task, env);
@@ -68,17 +80,6 @@ for thisTrial = 1:task.nTrials
         
     end
 
-    % Wait for a key press
-    %KbStrokeWait;
-    %[trial, exit] = responsePAS(window, trial, thisTrial, task);
-    
-    %mask(window, task)
-    % Wait for a key press
-    %KbStrokeWait;
-    
-    
-    
-    
 end
 
 switch dataSaveMode

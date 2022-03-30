@@ -1,6 +1,7 @@
-function task = taskParameters(trialnum, env, sessionID)
+function task = taskParameters(trialnum, env, sessionID, nTestTrials)
 
 task.nTrials = trialnum;
+task.nTrialsPractice = nTestTrials;
 
 task.screenColour = 0.5; % [169, 169, 169]; %
 
@@ -191,24 +192,33 @@ switch sessionID
         task.stimdur_narrowlow_complete = repelem(task.stimdur_narrowlow, 200); %no hard coding! this should be repeated depending on how many trials there will be
         task.stimdur_narrowlow_shuffled = Shuffle(task.stimdur_narrowlow_complete);
         task.stimExpTimesNarrowlow = task.stimdur_narrowlow_shuffled;
+        task.randElem = randi(length(task.stimExpTimesNarrowlow)-task.nTrialsPractice);
+        task.PracticeNarrowlow = task.stimExpTimesNarrowlow(task.randElem:task.randElem+task.nTrialsPractice-1);
     case 'wide'
         task.stimdur_wide = [0.016, 0.08, 0.144];
         task.stimdur_wide_complete = repelem(task.stimdur_wide, 200); %no hard coding! this should be repeated depending on how many trials there will be
         task.stimdur_wide_shuffled = Shuffle(task.stimdur_wide_complete);
         task.stimExpTimesWide = task.stimdur_wide_shuffled;
+        task.randElem = randi(length(task.stimExpTimesWide)-task.nTrialsPractice);
+        task.PracticeWide = task.stimExpTimesWide(task.randElem:task.randElem+task.nTrialsPractice-1);
     case 'narrowhigh'
         task.stimdur_narrowhigh = [0.08, 0.112, 0.144];%[0.016, 0.032, 0.048, 0.064, 0.08, 0.096, 0.112, 0.128, 0.144, 0.16, 0.176, 0.192, 0.208, 0.224, 0.24, 0.256, 0.272, 0.288, 0.304, 0.32];
         task.stimdur_narrowhigh_complete = repelem(task.stimdur_narrowhigh, 200); %no hard coding! this should be repeated depending on how many trials there will be
         task.stimdur_narrowhigh_shuffled = Shuffle(task.stimdur_narrowhigh_complete);
         task.stimExpTimesNarrowhigh = task.stimdur_narrowhigh_shuffled;
+        task.randElem = randi(length(task.stimExpTimesNarrowhigh)-task.nTrialsPractice);
+        task.PracticeNarrowhigh = task.stimExpTimesNarrowhigh(task.randElem:task.randElem+task.nTrialsPractice-1);
     case 'narrowMOA'
         task.MOA_narrow = [0.016, 0.032, 0.048, 0.064, 0.08, 0.096, 0.112, 0.128, 0.144, 0.16, 0.176, 0.192, 0.208, 0.224, 0.24, 0.256, 0.272, 0.288, 0.304, 0.32];
         task.MOA_narrow_complete = repelem(task.MOA_narrow, 30); %no hard coding! this should be repeated depending on how many trials there will be
         task.MOA_narrow_shuffled = Shuffle(task.MOA_narrow_complete);
         task.MOAnarrow = task.MOA_narrow_shuffled;
+        task.randElem = randi(length(task.MOAnarrow)-task.nTrialsPractice);
+        task.PracticeMOAnarrow = task.MOAnarrow(task.randElem:task.randElem+task.nTrialsPractice-1);
 end
 
-task.breaknr = [2,150, 300, 450, 600];
+task.BlockSize = 75;
+task.breaknr = [task.BlockSize+task.nTrialsPractice, task.BlockSize*2+task.nTrialsPractice, task.BlockSize*3+task.nTrialsPractice, task.BlockSize*4+task.nTrialsPractice, task.BlockSize*5+task.nTrialsPractice, task.BlockSize*6+task.nTrialsPractice, task.BlockSize*7+task.nTrialsPractice, task.BlockSize*8+task.nTrialsPractice];
 
 % Fonts and environment setup
 task.fontsizeInstruction = 1; % Font size for instructions [deg of visual field]

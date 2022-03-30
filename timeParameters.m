@@ -38,7 +38,7 @@ time.initGap = 1; % Time before first stimulus appears [ms], after instructions
 time.itiGap = 1; % Inter trial interval [ms], time between response and next trial onset
 time.respWait = 3.0; % How long to allow for the response
 time.respGap = 0.2; % Gap before response
-
+time.break = 30; %break time
 
 
 %% Breaks
