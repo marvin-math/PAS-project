@@ -1,4 +1,4 @@
-function [env, trialData] = environmentSetup(window, windowRect, subjID, sessionID)
+function [env, trialData] = environmentSetup(window, windowRect, subjID, sessionID, environment)
 
 %% Paths and data saving
 
@@ -8,8 +8,11 @@ function [env, trialData] = environmentSetup(window, windowRect, subjID, session
 % Make file ID and directory and output file
 env.fileID = ['SUB_', subjID];
 env.fileName = [env.fileID, sessionID];
-env.fileDir = fullfile('C:\Users\marvi\Documents\MATLAB\Masterarbeit\data', env.fileID);
-env.ImageFolderLocation = fullfile('C:\Users\marvi\Documents\MATLAB\Masterarbeit\images\Rastergrafik.png');
+%env.fileDir = fullfile('C:\Users\marvi\Documents\MATLAB\Masterarbeit\data', env.fileID);
+env.fileDir = fullfile(pwd, env.fileID);
+%env.ImageFolderLocation = fullfile('C:\Users\marvi\Documents\MATLAB\Masterarbeit\images\Rastergrafik.png');
+env.ImageFolderLocation = fullfile(pwd, 'Rastergrafik.png');
+
 if ~exist(env.fileDir,'dir')
     mkdir(env.fileDir);
 end
@@ -32,21 +35,21 @@ varTypes = {'double', 'string', 'double', 'double', 'double', 'double', 'double'
 size = [0, length(varNames)];
 trialData = table('Size', size, 'VariableTypes', varTypes, 'VariableNames', varNames);
  
-% %% Define the environment
-% % Monitor settings for each environment
-% switch environment
-%     
-%     case 'MarvinHome'
-%         env.distFromScreen = 60;  % Manually enter distance in cm
-%         env.screenSize = [65, 29.9] ; % Manually enter screen size [x, y] in cm
-%         
-%     case 'officeBCCN'
-%         env.distFromScreen = 50; % Manually enter distance in cm
-%         env.screenSize = [61, 33.5]; % Manually enter screen size [x, y] in cm
-%     
-% end
+%% Define the environment
+% Monitor settings for each environment
+switch environment
+    
+    case 'MarvinHome'
+        env.distFromScreen = 60;  % Manually enter distance in cm
+        env.screenSize = [65, 29.9] ; % Manually enter screen size [x, y] in cm
+        
+    case 'officeBCCN'
+        env.distFromScreen = 97; % Manually enter distance in cm
+        env.screenSize = [52, 32.5]; % Manually enter screen size [x, y] in cm
+    
+end
 
-%% screen / monitor settings
+% %% screen / monitor settings
 % % Get monitor info
 % env.whichScreen = max(Screens);
 % screenInfo = Screen('Resolution', env.whichScreen);

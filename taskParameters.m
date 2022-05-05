@@ -16,7 +16,7 @@ task.maxDiameter = max(task.baseRect);
 task.centeredRect = CenterRectOnPointd(task.baseRect, env.xCenter, env.yCenter-325);
 
 % Set the color of the rect to red
-task.rectColor = [1 0 0];
+task.rectColor = [0 0 0];
 
 %penWidth
 task.penWidthPixels = 3;
@@ -30,13 +30,13 @@ task.squareXpos = env.screenXpixels * 0.25;
 
 
 % Set the colors to Red, Green and Blue
-task.Color = [1 1 1];
+task.Color = [0 0 0];
 
 % Make our rectangle coordinates
 task.centeredRect_square = CenterRectOnPointd(task.baseRect_square, env.xCenter-300, env.yCenter+200);
 
 % Pen width for the frames
-task.penWidthPixels_square = 2;
+task.penWidthPixels_square = 3;
 
 %TRIANGLE
 % Number of sides for our polygon
@@ -54,12 +54,7 @@ task.radius = 150;
 task.yPosVector = sin(task.anglesRad) .* task.radius + env.yCenter+200;
 task.xPosVector = cos(task.anglesRad) .* task.radius + env.xCenter + 300;
 
-% Set the color of the rect to red
-task.triColor = [1 1 0];
 
-% Cue to tell PTB that the polygon is convex (concave polygons require much
-% more processing)
-%isConvex = 1;
 
 task.penWidthPixels_tri = 3;
 
@@ -80,7 +75,7 @@ task.yPosVector_d = sin(task.anglesRad_d) .* task.radius_d + env.yCenter;
 task.xPosVector_d = cos(task.anglesRad_d) .* task.radius_d + env.xCenter;
 
 % Set the color of the rect to red
-task.diColor = [1 1 1];
+task.diColor = [0 0 0];
 
 % Cue to tell PTB that the polygon is convex (concave polygons require much
 % more processing)
@@ -100,7 +95,7 @@ task.xPosVector_d_m = cos(task.anglesRad_d) .* task.radius_d + env.xCenter;
 task.PASnResp = 4;
 
 % COlour for pas scale
-task.PASlineColour = [1 1 1];
+task.PASlineColour = [0 0 0];
 
 % Colour for PAS selection
 task.PASselectColour = [1 1 0];
@@ -122,7 +117,7 @@ task.PASresponses = [task.PASrespLine1; task.PASrespLine2; task.PASrespLine3; ta
 task.ObjnResp = 4;
 
 % Colour for objective task stimuli
-task.ObjTaskColour = [1 1 1];
+task.ObjTaskColour = [0 0 0];
 
 % Colour for objective task selection
 task.ObjSelectColour = [1 1 0];
@@ -144,7 +139,7 @@ task.baseRect_square_r = [0 0 100 100];
 % Screen X positions of our three rectangles
 task.squareXpos_r = env.screenXpixels * 0.25;
 % Pen width for the frames
-task.penWidthPixels_square_r = 2;
+task.penWidthPixels_square_r = 3;
 
 % TRIANGLE
 % Angles at which our polygon vertices endpoints will be. We start at zero
@@ -218,7 +213,7 @@ switch sessionID
 end
 
 task.BlockSize = 75;
-task.breaknr = [task.BlockSize+task.nTrialsPractice, task.BlockSize*2+task.nTrialsPractice, task.BlockSize*3+task.nTrialsPractice, task.BlockSize*4+task.nTrialsPractice, task.BlockSize*5+task.nTrialsPractice, task.BlockSize*6+task.nTrialsPractice, task.BlockSize*7+task.nTrialsPractice, task.BlockSize*8+task.nTrialsPractice];
+task.breaknr = [task.BlockSize+task.nTrialsPractice, task.BlockSize*2+task.nTrialsPractice, task.BlockSize*3+task.nTrialsPractice, task.BlockSize*4+task.nTrialsPractice, task.BlockSize*5+task.nTrialsPractice, task.BlockSize*6+task.nTrialsPractice, task.BlockSize*7+task.nTrialsPractice];
 
 % Fonts and environment setup
 task.fontsizeInstruction = 1; % Font size for instructions [deg of visual field]

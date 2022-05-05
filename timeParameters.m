@@ -60,7 +60,7 @@ time.break = 30; %break time
 % time.avgDelay = mean(abs(task.cueDelays));
 % time.avgTrial = time.stimExpTime+time.avgDelay+time.respGap+time.respWait + time.itiGap;
 %% Save flip info
-varNames = {'TimeRealFlip','TimeExpected', 'WhichObject', 'manip. Duration', 'Trial'};
+varNames = {'TimeRealFlip','TimeExpected', 'WhichObject', 'manipDuration', 'Trial'};
 varTypes = {'double', 'double', 'string', 'double', 'double'};
 size = [0, length(varNames)];
 timingData = table('Size', size, 'VariableTypes', varTypes, 'VariableNames', varNames);

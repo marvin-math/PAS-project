@@ -42,10 +42,7 @@ end
 env.pixPerDegAvg = round((pixPerDegX + pixPerDegY)/2, 0);
 
 
-%% Fixation radius
-visAngleRad = deg2rad(task.fixRadius);
-task.fixRadiusCm = tan(visAngleRad) * env.distFromScreen;
-task.fixRadiusPixels = round(task.fixRadius * env.pixPerDegAvg);
+
 
 %% Stimulus size (simplified)
 % We calculate the size of the stimulus in cm/pixels as if it were in the

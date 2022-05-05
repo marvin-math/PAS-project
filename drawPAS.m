@@ -3,6 +3,7 @@ function drawPAS(window, env, task)
 % Make a base Rect of 200 by 200 pixels
 baseRect_square = [0 0 600 1];
 respRect_1 = [0 0 1 50];
+PAScolor = [0 0 0];
 
 % Make PAS coordinates
 centeredRect_square = CenterRectOnPointd(baseRect_square, env.xCenter, env.yCenter);
@@ -22,21 +23,21 @@ Screen('FrameRect', window, task.PASlineColour, resp_line3, penWidthPixels_squar
 Screen('FrameRect', window, task.PASlineColour, resp_line4, penWidthPixels_square);
 
 %text
-Screen('TextSize', window, 15);
+Screen('TextSize', window, 20);
 DrawFormattedText(window, 'Clear experience', env.xCenter+230,...
-    env.screenYpixels*0.45, [1 1 1]);
+    env.screenYpixels*0.45, PAScolor);
 
-Screen('TextSize', window, 15);
+Screen('TextSize', window, 20);
 DrawFormattedText(window, 'Almost clear experience', env.xCenter-5,...
-    env.screenYpixels*0.45, [1 1 1]);
+    env.screenYpixels*0.45, PAScolor);
 
-Screen('TextSize', window, 15);
+Screen('TextSize', window, 20);
 DrawFormattedText(window, 'Brief glimpse', env.xCenter-150,...
-    env.screenYpixels*0.45, [1 1 1]);
+    env.screenYpixels*0.45, PAScolor);
 
-Screen('TextSize', window, 15);
+Screen('TextSize', window, 20);
 DrawFormattedText(window, 'No experience', env.xCenter-360,...
-    env.screenYpixels*0.45, [1 1 1]);
+    env.screenYpixels*0.45, PAScolor);
 
 % Flip to the screen
 %Screen('Flip', window);

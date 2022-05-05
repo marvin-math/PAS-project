@@ -11,10 +11,10 @@ function instructions(env, window, task)
         
         screen3 =['\n\n\nThere will be ' , num2str(task.BlockSize),  ' trials within one block.' ...
             '\n\nAfter each block there will be a break. Please use this break to rest your eyes for at least 30 seconds.'...
-            '\n\n\nThere will be ', num2str(length(task.breaknr)), ' blocks in total.'];
+            '\n\n\nThere will be ', num2str(length(task.breaknr)+1), ' blocks in total.'];
         
         screen4 = ['Please keep the following instructions in mind:' ...
-            '\n\n\n1) You should ALWAYS keep your eyes on the fixation dot, even while the letters or cue are shown.' ...
+            '\n\n\n1) You should ALWAYS keep your eyes on the fixation dot when it is displayed.' ...
             '\n\n       Your performance will be the best if you keep fixating the dot.' ...
             '\n\n2) Please try NOT to use any specific strategies (e.g., pay attention to only one part of the screen).'...
             '\n\n3) Please try to stay alert on every trial, and take as long breaks as you need.' ...
@@ -22,7 +22,7 @@ function instructions(env, window, task)
             '\n\n          Even when you don''t know the answer, please make a guess.'];
         
         screen5 = ['You will now be given ', num2str(task.nTrialsPractice),' practice trials.' ...
-            '\n\nAfter 5 trials there will be a break when you can ask questions.' ...
+            '\n\nAfter these practice trials there will be a break when you can ask questions.' ...
             '\n\n\n Press any key to start the practice run.'];
         
         % Read an image
@@ -31,13 +31,15 @@ function instructions(env, window, task)
         % Make the image into a texture
         PASInstructionTex = Screen('MakeTexture', window, thisImage);
             
-        instructionsColor = [1 1 1];
+        instructionsColor = [0 0 0];
         
         % Screen1
+        Screen('TextSize', window, 30);
         DrawFormattedText(window, screen1, 'center', 'center', instructionsColor);
         Screen('Flip', window);
         [~, ~, ~] = KbStrokeWait;
         % Screen2
+        Screen('TextSize', window, 30);
         DrawFormattedText(window, screen2, 'center', 'center', instructionsColor);
         Screen('Flip', window);
         [~, ~, ~] = KbStrokeWait;
@@ -46,14 +48,17 @@ function instructions(env, window, task)
         Screen('Flip', window);
         [~, ~, ~] = KbStrokeWait;
         % Screen3
+        Screen('TextSize', window, 30);
         DrawFormattedText(window, screen3, 'center', 'center', instructionsColor);
         Screen('Flip', window);
         [~, ~, ~] = KbStrokeWait;
         % Screen4
+        Screen('TextSize', window, 30);
         DrawFormattedText(window, screen4, 'center', 'center', instructionsColor);
         Screen('Flip', window);
         [~, ~, ~] = KbStrokeWait;
         % Screen5
+        Screen('TextSize', window, 30);
         DrawFormattedText(window, screen5, 'center', 'center', instructionsColor);
         Screen('Flip', window);
         [secs, ~, ~] = KbStrokeWait;
