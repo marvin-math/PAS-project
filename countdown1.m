@@ -10,7 +10,7 @@ for sec = 1:time.break
     WaitSecs(1);
 
 end
-    text = ['Next block: ',num2str(((thisTrial-task.nTrialsPractice)/task.BlockSize)+1), ...
+    text = ['Next block: ', num2str(((thisTrial-task.nTrialsPractice-1)/task.BlockSize)+1), ...                %num2str(((thisTrial-task.nTrialsPractice)/task.BlockSize)+1), ...
         '\n\n\nWhen you are ready, press any key to start the block.'];
     DrawFormattedText(window, text, 'center', 'center');
     Screen('Flip',window);

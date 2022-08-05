@@ -25,9 +25,7 @@ while(~strcmp(keyName,'Return'))
         trial(thisTrial).respPos = trial(thisTrial).respPos + 1;
         drawResponse(window, 'PAS', trial, thisTrial, env, task);
         keyName = '';
-    elseif strcmp(keyName,'ESCAPE')
-        Screen('close');
-        sca;
+    elseif strcmp(keyName,'ESCAPE')        
         exit = 1;
         return;
     end     

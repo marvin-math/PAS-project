@@ -21,11 +21,11 @@ time.halfifi = time.ifi/2;
 switch sessionID
     case 'narrowMOA'
         time.StimExp = 0.016;
-    case 'narrowlow'
+    case 0
         time.MOA = 0;
     case 'narrowhigh'
         time.MOA = 0;
-    case 'wide'
+    case 1
         time.MOA = 0;
 end
         

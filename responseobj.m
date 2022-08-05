@@ -25,8 +25,6 @@ while(~strcmp(keyName,'Return'))
         drawResponse(window, 'objective', trial, thisTrial, env, task);
         keyName = '';
     elseif strcmp(keyName,'ESCAPE')
-        Screen('close');
-        sca;
         exit = 1;
         return;
     end     

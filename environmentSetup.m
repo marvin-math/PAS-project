@@ -6,12 +6,13 @@ function [env, trialData] = environmentSetup(window, windowRect, subjID, session
 
 
 % Make file ID and directory and output file
-env.fileID = ['SUB_', subjID];
-env.fileName = [env.fileID, sessionID];
+env.subID = subjID;
+env.fileID = ['SUB_', subjID, '_', num2str(sessionID)];
+env.fileName = [env.fileID, '_', num2str(sessionID)];
 %env.fileDir = fullfile('C:\Users\marvi\Documents\MATLAB\Masterarbeit\data', env.fileID);
-env.fileDir = fullfile(pwd, env.fileID);
+env.fileDir = fullfile(pwd, 'data', env.fileID);
 %env.ImageFolderLocation = fullfile('C:\Users\marvi\Documents\MATLAB\Masterarbeit\images\Rastergrafik.png');
-env.ImageFolderLocation = fullfile(pwd, 'Rastergrafik.png');
+env.ImageFolderLocation = fullfile(pwd, 'Rastergrafik.jpg');
 
 if ~exist(env.fileDir,'dir')
     mkdir(env.fileDir);
@@ -29,9 +30,9 @@ end
 [env.xCenter, env.yCenter] = RectCenter(windowRect);
 
 % Create a table for storing data
-varNames = {'trial', 'condition', 'MOA', 'corrStim', 'respStim', 'RT', ...
+varNames = {'trial', 'SUB_ID', 'condition', 'corrStim', 'respStim', ...
     'PASresp', 'PracticeTrials', 'RTobj', 'RTpas'};
-varTypes = {'double', 'string', 'double', 'double', 'double', 'double', 'double', 'double', 'double', 'double'};
+varTypes = {'double', 'double' 'string', 'double', 'double', 'double', 'double', 'double', 'double'};
 size = [0, length(varNames)];
 trialData = table('Size', size, 'VariableTypes', varTypes, 'VariableNames', varNames);
  

@@ -16,10 +16,10 @@ switch sessionID
     case 'narrowMOA'
         MOA = trial(thisTrial).MOATime;
         stimExp = time.StimExp;
-    case 'narrowlow'
+    case 0
         MOA = time.MOA;
         stimExp = trial(thisTrial).stimExpTime;
-    case 'wide'
+    case 1
         MOA = time.MOA;
         stimExp = trial(thisTrial).stimExpTime;
     case 'narrowhigh'
@@ -66,24 +66,24 @@ expectedTime = expectedTime + stimExp;
 
 % Delay before mask
 % Empty screen for delay
-if MOA == 0 % If there's no cue delay
-    % Save data
-    timeRealFlip(counter) = nan;
-    timeExpectedFlip(counter) = nan;
-    whichObject(counter) = 'delay';
-    counter = counter + 1;
-else % Otherwise if there is some delay - draw fixation only
-    Screen('DrawDots', window, [env.xCenter, env.yCenter], dotSizePix, task.Color, [], 2);
-    Screen('DrawingFinished', window);
-    vbl = Screen('Flip', window, startTime + expectedTime - time.halfifi);
-    timeRealFlip(counter) = vbl - startTime;
-    timeExpectedFlip(counter) = expectedTime;
-    whichObject(counter) = 'delay';
-    counter = counter + 1;
-    %img = Screen('GetImage', window);
-    %imwrite(img, 'fixation.png', 'PNG');
-end
-expectedTime = expectedTime + MOA;
+% if MOA == 0 % If there's no cue delay
+%     % Save data
+%     timeRealFlip(counter) = nan;
+%     timeExpectedFlip(counter) = nan;
+%     whichObject(counter) = 'delay';
+%     counter = counter + 1;
+% else % Otherwise if there is some delay - draw fixation only
+%     Screen('DrawDots', window, [env.xCenter, env.yCenter], dotSizePix, task.Color, [], 2);
+%     Screen('DrawingFinished', window);
+%     vbl = Screen('Flip', window, startTime + expectedTime - time.halfifi);
+%     timeRealFlip(counter) = vbl - startTime;
+%     timeExpectedFlip(counter) = expectedTime;
+%     whichObject(counter) = 'delay';
+%     counter = counter + 1;
+%     %img = Screen('GetImage', window);
+%     %imwrite(img, 'fixation.png', 'PNG');
+% end
+% expectedTime = expectedTime + MOA;
 
 % Draw the mask
 Screen('FrameOval', window, task.Color, task.centeredRect_m, task.penWidthPixels);
@@ -117,9 +117,9 @@ WaitSecs(time.respGap);
 switch sessionID
     case 'narrowMOA'
         manipulation = trial(thisTrial).MOATime;
-    case 'narrowlow'
+    case 0
         manipulation = trial(thisTrial).stimExpTime;
-    case'wide'
+    case 1
         manipulation = trial(thisTrial).stimExpTime;
     case 'narrowhigh'
         manipulation = trial(thisTrial).stimExpTime;

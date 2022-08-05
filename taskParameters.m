@@ -3,7 +3,7 @@ function task = taskParameters(trialnum, env, sessionID, nTestTrials)
 task.nTrials = trialnum;
 task.nTrialsPractice = nTestTrials;
 
-task.screenColour = 0.5; % [169, 169, 169]; %
+task.screenColour = 0.7; % [169, 169, 169]; %
 
 % CIRCLE
 % Make a base Rect of 200 by 250 pixels
@@ -19,7 +19,7 @@ task.centeredRect = CenterRectOnPointd(task.baseRect, env.xCenter, env.yCenter-3
 task.rectColor = [0 0 0];
 
 %penWidth
-task.penWidthPixels = 3;
+task.penWidthPixels = 4;
 
 %SQUARE
 % Make a base Rect of 200 by 200 pixels
@@ -36,7 +36,7 @@ task.Color = [0 0 0];
 task.centeredRect_square = CenterRectOnPointd(task.baseRect_square, env.xCenter-300, env.yCenter+200);
 
 % Pen width for the frames
-task.penWidthPixels_square = 3;
+task.penWidthPixels_square = 4;
 
 %TRIANGLE
 % Number of sides for our polygon
@@ -56,7 +56,7 @@ task.xPosVector = cos(task.anglesRad) .* task.radius + env.xCenter + 300;
 
 
 
-task.penWidthPixels_tri = 3;
+task.penWidthPixels_tri = 4;
 
 %DIAMOND
 % Number of sides for our polygon
@@ -81,7 +81,7 @@ task.diColor = [0 0 0];
 % more processing)
 %isConvex = 1;
 
-task.penWidthPixels_di = 3;
+task.penWidthPixels_di = 5;
 
 %% mask
 task.centeredRect_m = CenterRectOnPointd(task.baseRect, env.xCenter, env.yCenter);
@@ -182,14 +182,14 @@ task.ObjResponses = [task.ObjRespTriangle; task.ObjRespDiamond; task.ObjRespSqua
 
 %% CONDITIONS
 switch sessionID
-    case 'narrowlow'
+    case 0
         task.stimdur_narrowlow = [0.016, 0.048, 0.08];%[0.016, 0.032, 0.048, 0.064, 0.08, 0.096, 0.112, 0.128, 0.144, 0.16, 0.176, 0.192, 0.208, 0.224, 0.24, 0.256, 0.272, 0.288, 0.304, 0.32];
         task.stimdur_narrowlow_complete = repelem(task.stimdur_narrowlow, 200); %no hard coding! this should be repeated depending on how many trials there will be
         task.stimdur_narrowlow_shuffled = Shuffle(task.stimdur_narrowlow_complete);
         task.stimExpTimesNarrowlow = task.stimdur_narrowlow_shuffled;
         task.randElem = randi(length(task.stimExpTimesNarrowlow)-task.nTrialsPractice);
         task.PracticeNarrowlow = task.stimExpTimesNarrowlow(task.randElem:task.randElem+task.nTrialsPractice-1);
-    case 'wide'
+    case 1
         task.stimdur_wide = [0.016, 0.08, 0.144];
         task.stimdur_wide_complete = repelem(task.stimdur_wide, 200); %no hard coding! this should be repeated depending on how many trials there will be
         task.stimdur_wide_shuffled = Shuffle(task.stimdur_wide_complete);
@@ -212,12 +212,20 @@ switch sessionID
         task.PracticeMOAnarrow = task.MOAnarrow(task.randElem:task.randElem+task.nTrialsPractice-1);
 end
 
-task.BlockSize = 75;
-task.breaknr = [task.BlockSize+task.nTrialsPractice, task.BlockSize*2+task.nTrialsPractice, task.BlockSize*3+task.nTrialsPractice, task.BlockSize*4+task.nTrialsPractice, task.BlockSize*5+task.nTrialsPractice, task.BlockSize*6+task.nTrialsPractice, task.BlockSize*7+task.nTrialsPractice];
+task.BlockSize = 50;
+task.breaknr = [];
+task.blockindex = 0;
+for n = 1:11
+    task.breaknr = [task.breaknr, task.BlockSize*n + task.nTrialsPractice+1];
+end
 
 % Fonts and environment setup
 task.fontsizeInstruction = 1; % Font size for instructions [deg of visual field]
 task.fixRadius = 0.25; % Radius of fixation dot [deg of visual field]
+
+% Catch trials
+task.nCatchTrials = 30;
+task.catchTrials =  randsample(task.nTrialsPractice:task.nTrials+task.nTrialsPractice, task.nCatchTrials);
 
 %% Visual setup
 

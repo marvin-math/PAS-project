@@ -1,16 +1,17 @@
-function trial = generateTrials(window, task, sessionID)
+function trial = generateTrials(task, sessionID)
 
 PracticeCounter = 1;
 for thisTrial = 1:task.nTrialsPractice
     trial(thisTrial).nStimulus = randsample(1:4,1);
     trial(thisTrial).respPos = randi(task.PASnResp);
     trial(thisTrial).ObjRespPos = randi(task.ObjnResp);
+    trial(thisTrial).practiceTrial = 1;
     PracticeCounter = PracticeCounter+1;
     
     switch sessionID
-        case 'wide'
+        case 1
             trial(thisTrial).stimExpTime = task.PracticeWide(PracticeCounter-1);
-        case 'narrowlow'
+        case 0
             trial(thisTrial).stimExpTime = task.PracticeNarrowlow(PracticeCounter-1);
         case 'narrowhigh'
             trial(thisTrial).stimExpTime = task.PracticeNarrowhigh(PracticeCounter-1);
@@ -26,12 +27,13 @@ for thisTrial = task.nTrialsPractice +1 :task.nTrials + task.nTrialsPractice
     trial(thisTrial).nStimulus = randsample(1:4,1);
     trial(thisTrial).respPos = randi(task.PASnResp);
     trial(thisTrial).ObjRespPos = randi(task.ObjnResp);
+    trial(thisTrial).practiceTrial = 0;
     counter = counter + 1;
     switch sessionID
-        case 'wide'
+        case 1
             trial(thisTrial).stimExpTime = task.stimExpTimesWide(counter-1);
             
-        case 'narrowlow'
+        case 0
             trial(thisTrial).stimExpTime = task.stimExpTimesNarrowlow(counter-1);
         case 'narrowhigh'
             trial(thisTrial).stimExpTime = task.stimExpTimesNarrowhigh(counter-1);
